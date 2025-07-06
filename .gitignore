@@ -1,0 +1,70 @@
+﻿## .NET Build Folders ##
+bin/
+obj/
+
+## Rider-specific ##
+.idea/
+*.sln.iml
+
+## User-specific files ##
+*.user
+*.userosscache
+*.suo
+*.sdf
+*.cache
+*.dbmdl
+
+## VS Code (if some team members use it) ##
+.vscode/
+
+## ASP.NET specific ##
+*.Publish.xml
+
+## Logs and database ##
+*.log
+*.mdf
+*.ldf
+
+## Auto-generated files ##
+Generated_Code/
+*.g.cs
+*.g.i.cs
+
+## Build artifacts ##
+*.dll
+*.exe
+*.app
+*.so
+*.dylib
+*.pdb
+
+## NuGet ##
+*.nupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+## Web projects ##
+node_modules/
+bower_components/
+wwwroot/lib/
+
+## Other JetBrains-specific caches ##
+.idea/
+*.DotSettings.user
+
+## MacOS ##
+.DS_Store
+
+## Linux ##
+*~
+
+## Windows ##
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+## ReSharper (sometimes present separately) ##
+_ReSharper*/
+*.DotSettings.user
