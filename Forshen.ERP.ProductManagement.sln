@@ -1,12 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement", "Src\Forshen.ERP.ProductManagement\Forshen.ERP.ProductManagement.csproj", "{E432AA85-3B59-485B-AE1A-4F99822F35D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement", "src\Forshen.ERP.ProductManagement\Forshen.ERP.ProductManagement.csproj", "{E432AA85-3B59-485B-AE1A-4F99822F35D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.Api", "Src\Forshen.ERP.ProductManagement.Api\Forshen.ERP.ProductManagement.Api.csproj", "{607E8ABE-F902-4CA5-A6C2-4AABF0E34279}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.Api", "src\Forshen.ERP.ProductManagement.Api\Forshen.ERP.ProductManagement.Api.csproj", "{607E8ABE-F902-4CA5-A6C2-4AABF0E34279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.BetterMinimalEndpoints", "Src\Forshen.ERP.ProductManagement.BetterMinimalEndpoints\Forshen.ERP.ProductManagement.BetterMinimalEndpoints.csproj", "{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.BetterMinimalEndpoints", "src\Forshen.ERP.ProductManagement.BetterMinimalEndpoints\Forshen.ERP.ProductManagement.BetterMinimalEndpoints.csproj", "{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{B24CBA82-42FC-444C-8D78-F81589F2C221}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.Cli", "Tools\Forshen.ERP.ProductManagement.Cli\Forshen.ERP.ProductManagement.Cli.csproj", "{F555124B-0EB0-4F3B-9798-588C61E60DB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +30,20 @@ Global
 		{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58880803-A1AB-4CDD-8E06-4936A14C5833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58880803-A1AB-4CDD-8E06-4936A14C5833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58880803-A1AB-4CDD-8E06-4936A14C5833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58880803-A1AB-4CDD-8E06-4936A14C5833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E432AA85-3B59-485B-AE1A-4F99822F35D2} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
 		{607E8ABE-F902-4CA5-A6C2-4AABF0E34279} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
 		{6A6C0DF2-1917-44AF-9FFE-5E1B1B7063F1} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
+		{58880803-A1AB-4CDD-8E06-4936A14C5833} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
+		{F555124B-0EB0-4F3B-9798-588C61E60DB8} = {B24CBA82-42FC-444C-8D78-F81589F2C221}
 	EndGlobalSection
 EndGlobal
