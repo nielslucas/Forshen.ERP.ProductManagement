@@ -1,13 +1,16 @@
 ﻿namespace Forshen.ERP.ProductManagement.Api.Endpoints.Movies;
 
-public static class GetByIdEndpointMapper
+[RouteGroupEndpoint(RouteGroupEndpointAttribute.Group.Movies)]
+public class GetByIdEndpointMapper : IRouteGroupEndpoint
 {
-    public static void MapGetByIdEndpoint(this MoviesGroupBuilder moviesGroupBuilder, RouteGroupBuilder routeGroupBuilder)
+    public RouteGroupBuilder MapGroup(RouteGroupBuilder group)
     {
-        routeGroupBuilder.MapGet("/{id:int}", (int id) =>
+        group.MapGet("/{id:int}", (int id) =>
             {
                 return Task.FromResult(id.ToString());
             })
             .WithName("GetMovieById");
+
+        return group;
     }
 }

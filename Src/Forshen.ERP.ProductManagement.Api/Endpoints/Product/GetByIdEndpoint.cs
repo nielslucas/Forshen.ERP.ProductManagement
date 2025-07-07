@@ -1,13 +1,16 @@
 ﻿namespace Forshen.ERP.ProductManagement.Api.Endpoints.Product;
 
-public static class GetByIdEndpoint
+[RouteGroupEndpoint(RouteGroupEndpointAttribute.Group.Products)]
+public class GetByIdEndpoint : IRouteGroupEndpoint
 {
-    public static void MapGetByIdEndpoint(this ProductGroupBuilder moviesGroupBuilder, RouteGroupBuilder routeGroupBuilder)
+    public RouteGroupBuilder MapGroup(RouteGroupBuilder group)
     {
-        routeGroupBuilder.MapGet("/{id:int}", (int id) =>
+        group.MapGet("/{id:int}", (int id) =>
             {
                 return Task.FromResult(id.ToString());
             })
-            .WithName("GetProductById");
+            .WithName("ProductGetById");
+        
+        return group;
     }
 }

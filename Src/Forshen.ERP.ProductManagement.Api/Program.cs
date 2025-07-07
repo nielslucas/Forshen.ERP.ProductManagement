@@ -1,4 +1,5 @@
 using Forshen.ERP.ProductManagement.Api;
+using Forshen.ERP.ProductManagement.Api.Endpoints;
 using Forshen.ERP.ProductManagement.Api.Endpoints.Movies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +40,7 @@ app.MapGet("/weatherforecast", () =>
     .WithName("GetWeatherForecast")
     .WithOpenApi();
 
-_ = new MoviesGroupBuilder().MapGroup(app);
+app.RegisterEndpoints();
 
 app.Run();
 
