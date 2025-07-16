@@ -17,10 +17,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired();
     
         builder.Property(p => p.CreatedAt)
-            .HasMaxLength(128)
             .IsRequired();
-    
-        builder.Property(p => p.UpdatedAt)
-            .HasMaxLength(128);
+
+        builder.Property(p => p.UpdatedAt);
     }
 }

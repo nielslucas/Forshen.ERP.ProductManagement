@@ -4,6 +4,7 @@ using Forshen.ERP.ProductManagement.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forshen.ERP.ProductManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250716200453_Variants")]
+    partial class Variants
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,71 +101,15 @@ namespace Forshen.ERP.ProductManagement.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasMaxLength(254)
+                        .HasColumnType("nvarchar(254)");
 
                     b.Property<DateTimeOffset?>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
-
-                    b.ToTable("Products", (string)null);
-                });
-
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Variant", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<bool>("MainVariant")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Variants", (string)null);
-                });
-
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.VariantDimensionValue", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("DimensionValueId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTimeOffset?>("UpdatedAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("VariantId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DimensionValueId");
-
-                    b.HasIndex("VariantId");
-
-                    b.ToTable("VariantDimensionValue");
                 });
 
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Dimension", b =>
@@ -187,36 +134,6 @@ namespace Forshen.ERP.ProductManagement.Migrations
                     b.Navigation("Dimension");
                 });
 
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Variant", b =>
-                {
-                    b.HasOne("Forshen.ERP.ProductManagement.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.VariantDimensionValue", b =>
-                {
-                    b.HasOne("Forshen.ERP.ProductManagement.Entities.DimensionValue", "DimensionValue")
-                        .WithMany()
-                        .HasForeignKey("DimensionValueId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Forshen.ERP.ProductManagement.Entities.Variant", "Variant")
-                        .WithMany("VariantDimensionValues")
-                        .HasForeignKey("VariantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DimensionValue");
-
-                    b.Navigation("Variant");
-                });
-
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Dimension", b =>
                 {
                     b.Navigation("DimensionValues");
@@ -227,11 +144,6 @@ namespace Forshen.ERP.ProductManagement.Migrations
                     b.Navigation("Dimensions");
 
                     b.Navigation("Variants");
-                });
-
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Variant", b =>
-                {
-                    b.Navigation("VariantDimensionValues");
                 });
 #pragma warning restore 612, 618
         }

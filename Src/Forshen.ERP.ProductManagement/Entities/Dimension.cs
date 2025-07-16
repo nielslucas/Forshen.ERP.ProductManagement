@@ -2,7 +2,7 @@
 
 namespace Forshen.ERP.ProductManagement.Entities;
 
-public class Dimension : IEntity, ITimestamps
+public class Dimension : IEntity
 {
     public int Id { get; set; }
     public required string Name { get; set; }

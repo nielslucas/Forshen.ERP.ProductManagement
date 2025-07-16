@@ -21,9 +21,8 @@ public class DimensionsValueConfiguration : IEntityTypeConfiguration<DimensionVa
     
         builder.Property(p => p.CreatedAt)
             .IsRequired();
-    
-        builder.Property(p => p.UpdatedAt)
-            .HasMaxLength(128);
+
+        builder.Property(p => p.UpdatedAt);
         
         builder.HasOne(v => v.Dimension)
             .WithMany(d => d.DimensionValues)
