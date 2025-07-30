@@ -17,12 +17,6 @@ public class Variant : IEntity
     /// </summary>
     public string Name { get; set; }
 
-    /// <inheritdoc/>
-    public DateTimeOffset CreatedAt { get; set; }
-    
-    /// <inheritdoc/>
-    public DateTimeOffset? UpdatedAt { get; set; }
-
     /// <summary>
     /// Determines if it's a main variant
     /// <para>
@@ -50,6 +44,12 @@ public class Variant : IEntity
     /// To which product the variant belongs to. 
     /// </summary>
     public Product Product { get; set; }
+    
+    /// <inheritdoc/>
+    public DateTimeOffset CreatedAt { get; set; }
+    
+    /// <inheritdoc/>
+    public DateTimeOffset? UpdatedAt { get; set; }
     
     /// <summary>
     /// The different kinds of dimensions together with its values for this variant
