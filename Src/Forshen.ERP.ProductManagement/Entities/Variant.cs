@@ -29,7 +29,17 @@ public class Variant : IEntity
     /// A variant is a main variant if it only made out of static values. Cause this is a base variant for example variants with THT that is dynamic.
     /// </para>
     /// </summary>
-    public required bool MainVariant { get; set; }
+    public required bool IsMainVariant { get; set; }
+
+    /// <summary>
+    /// If this variant is not a main variant, this field references the main variant it is derived from.
+    /// </summary>
+    public int? MainVariantId { get; set; }
+    
+    /// <summary>
+    /// The main variant from which this variant is derived, if applicable.
+    /// </summary>
+    public Variant? MainVariant { get; set; }
     
     /// <summary>
     /// The identifier to which product the variant belongs to.

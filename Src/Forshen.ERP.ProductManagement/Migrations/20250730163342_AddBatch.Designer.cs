@@ -4,6 +4,7 @@ using Forshen.ERP.ProductManagement.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forshen.ERP.ProductManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250730163342_AddBatch")]
+    partial class AddBatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,6 +55,9 @@ namespace Forshen.ERP.ProductManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DimensionValueId")
+                        .HasColumnType("int");
+
                     b.Property<DateTimeOffset>("ExpireDate")
                         .HasColumnType("datetimeoffset");
 
@@ -66,6 +72,9 @@ namespace Forshen.ERP.ProductManagement.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DimensionValueId")
+                        .IsUnique();
 
                     b.ToTable("Batch");
                 });
@@ -105,9 +114,6 @@ namespace Forshen.ERP.ProductManagement.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("BatchId")
-                        .HasColumnType("int");
-
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
@@ -123,10 +129,6 @@ namespace Forshen.ERP.ProductManagement.Migrations
                         .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BatchId")
-                        .IsUnique()
-                        .HasFilter("[BatchId] IS NOT NULL");
 
                     b.HasIndex("DimensionId");
 
@@ -237,19 +239,24 @@ namespace Forshen.ERP.ProductManagement.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Batch", b =>
+                {
+                    b.HasOne("Forshen.ERP.ProductManagement.Entities.DimensionValue", "DimensionValue")
+                        .WithOne("Batch")
+                        .HasForeignKey("Forshen.ERP.ProductManagement.Entities.Batch", "DimensionValueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DimensionValue");
+                });
+
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.DimensionValue", b =>
                 {
-                    b.HasOne("Forshen.ERP.ProductManagement.Entities.Batch", "Batch")
-                        .WithOne("DimensionValue")
-                        .HasForeignKey("Forshen.ERP.ProductManagement.Entities.DimensionValue", "BatchId");
-
                     b.HasOne("Forshen.ERP.ProductManagement.Entities.Dimension", "Dimension")
                         .WithMany("DimensionValues")
                         .HasForeignKey("DimensionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Batch");
 
                     b.Navigation("Dimension");
                 });
@@ -290,15 +297,14 @@ namespace Forshen.ERP.ProductManagement.Migrations
                     b.Navigation("Variant");
                 });
 
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Batch", b =>
-                {
-                    b.Navigation("DimensionValue")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Dimension", b =>
                 {
                     b.Navigation("DimensionValues");
+                });
+
+            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.DimensionValue", b =>
+                {
+                    b.Navigation("Batch");
                 });
 
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Product", b =>

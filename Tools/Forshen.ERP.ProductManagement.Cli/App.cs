@@ -22,15 +22,25 @@ public class App
         var dimensionSize = GetOrCreateDimension("Size");
         var dimensionSize40 = GetOrCreateDimensionValue(dimensionSize, "40");
         var dimensionSize42 = GetOrCreateDimensionValue(dimensionSize, "42");
+        
+        var dimensionTHT = GetOrCreateDimension("THT", Dimension.DimensionType.Batch);
+        var dimensionTHT20280730 = GetOrCreateDimensionValue(dimensionTHT, "2028-07-30");
+        dimensionTHT20280730.Batch = new Batch
+        {
+            Number = "20280730",
+            Description = "THT 2028-07-30",
+            ExpireDate = new DateTimeOffset(2028, 7, 30, 0, 0, 0, TimeSpan.FromHours(2)),
+            ProductionDate = new DateTimeOffset(2025, 7, 30, 18, 15, 0, TimeSpan.FromHours(2)),
+        };
 
         var product = new Product
         {
             Name = "Schoen 1",
-            Dimensions = [dimensionColor,  dimensionSize],
+            Dimensions = [dimensionColor,  dimensionSize, dimensionTHT],
             Variants = [
                 new Variant
                 {
-                    MainVariant = true,
+                    IsMainVariant = true,
                     VariantDimensionValues = [
                         new VariantDimensionValue
                         {
@@ -44,7 +54,7 @@ public class App
                 },
                 new Variant
                 {
-                    MainVariant = true,
+                    IsMainVariant = true,
                     VariantDimensionValues = [
                         new VariantDimensionValue
                         {
@@ -53,6 +63,24 @@ public class App
                         new VariantDimensionValue
                         {
                             DimensionValue = dimensionSize42
+                        }
+                    ]
+                },
+                new Variant
+                {
+                    IsMainVariant = false,
+                    VariantDimensionValues = [
+                        new VariantDimensionValue
+                        {
+                            DimensionValue = dimensionColorRed
+                        },
+                        new VariantDimensionValue
+                        {
+                            DimensionValue = dimensionSize42
+                        },
+                        new VariantDimensionValue
+                        {
+                            DimensionValue = dimensionTHT20280730
                         }
                     ]
                 }
@@ -70,7 +98,11 @@ public class App
             .ThenInclude(v => v.VariantDimensionValues)
             .ThenInclude(vdv => vdv.DimensionValue)
             .ThenInclude(dv => dv.Dimension)
-            .Where(x => x.Id == product.Id)
+            .Include(p => p.Variants)
+            .ThenInclude(v => v.VariantDimensionValues)
+            .ThenInclude(vdv => vdv.DimensionValue)
+            .ThenInclude(dv => dv.Batch)
+            .Where(p => p.Id == product.Id)
             .SingleAsync();
 
         Console.WriteLine("Product has these variants with dimensions:");
@@ -79,12 +111,24 @@ public class App
             Console.WriteLine($"Variant: {productVariant.Name}");
             foreach (var variantDimensionValue in productVariant.VariantDimensionValues)
             {
-                Console.WriteLine($"{variantDimensionValue.DimensionValue.Dimension.Name}: {variantDimensionValue.DimensionValue.Value}");
+                var variantValues = new List<string>
+                {
+                    $"{variantDimensionValue.DimensionValue.Dimension.Name}: {variantDimensionValue.DimensionValue.Value}"
+                };
+
+                var batch = variantDimensionValue.DimensionValue.Batch;
+
+                if (batch is not null)
+                {
+                    variantValues.Add($"THT: {batch.ExpireDate}");
+                }
+                    
+                Console.WriteLine(string.Join(", ", variantValues));
             }
         }
     }
     
-    private Dimension GetOrCreateDimension(string name)
+    private Dimension GetOrCreateDimension(string name, Dimension.DimensionType type =  Dimension.DimensionType.Attribute)
     {
         var dimensionColor = _dbContext.Dimensions.SingleOrDefault(d => d.Name == name);
 
@@ -92,7 +136,8 @@ public class App
         {
             dimensionColor = new Dimension
             {
-                Name = name
+                Name = name,
+                Type = type
             };
     
             _dbContext.Dimensions.Add(dimensionColor);   

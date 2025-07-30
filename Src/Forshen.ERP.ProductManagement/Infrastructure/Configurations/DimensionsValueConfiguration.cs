@@ -27,5 +27,9 @@ public class DimensionsValueConfiguration : IEntityTypeConfiguration<DimensionVa
         builder.HasOne(v => v.Dimension)
             .WithMany(d => d.DimensionValues)
             .HasForeignKey(v => v.DimensionId);
+        
+        builder.HasOne(dv => dv.Batch)
+            .WithOne(b => b.DimensionValue)
+            .HasForeignKey<DimensionValue>(dv => dv.BatchId);
     }
 }

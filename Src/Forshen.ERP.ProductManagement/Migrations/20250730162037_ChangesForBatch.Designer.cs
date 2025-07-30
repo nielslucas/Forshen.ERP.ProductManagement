@@ -4,6 +4,7 @@ using Forshen.ERP.ProductManagement.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Forshen.ERP.ProductManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250730162037_ChangesForBatch")]
+    partial class ChangesForBatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,9 +127,7 @@ namespace Forshen.ERP.ProductManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BatchId")
-                        .IsUnique()
-                        .HasFilter("[BatchId] IS NOT NULL");
+                    b.HasIndex("BatchId");
 
                     b.HasIndex("DimensionId");
 
@@ -240,8 +241,8 @@ namespace Forshen.ERP.ProductManagement.Migrations
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.DimensionValue", b =>
                 {
                     b.HasOne("Forshen.ERP.ProductManagement.Entities.Batch", "Batch")
-                        .WithOne("DimensionValue")
-                        .HasForeignKey("Forshen.ERP.ProductManagement.Entities.DimensionValue", "BatchId");
+                        .WithMany()
+                        .HasForeignKey("BatchId");
 
                     b.HasOne("Forshen.ERP.ProductManagement.Entities.Dimension", "Dimension")
                         .WithMany("DimensionValues")
@@ -288,12 +289,6 @@ namespace Forshen.ERP.ProductManagement.Migrations
                     b.Navigation("DimensionValue");
 
                     b.Navigation("Variant");
-                });
-
-            modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Batch", b =>
-                {
-                    b.Navigation("DimensionValue")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Forshen.ERP.ProductManagement.Entities.Dimension", b =>
