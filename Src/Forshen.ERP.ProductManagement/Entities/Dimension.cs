@@ -6,7 +6,8 @@ public class Dimension : IEntity
 {
     public int Id { get; set; }
     public required string Name { get; set; }
-    public required DateTimeOffset CreatedAt { get; set; }
-    public required DateTimeOffset? UpdatedAt { get; set; }
-    public required ICollection<DimensionValue> DimensionValues { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset? UpdatedAt { get; set; }
+    public ICollection<DimensionValue> DimensionValues { get; set; } = [];
+    public ICollection<Product> Products { get; set; } = [];
 }

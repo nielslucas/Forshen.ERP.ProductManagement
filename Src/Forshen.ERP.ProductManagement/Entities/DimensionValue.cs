@@ -4,8 +4,8 @@ namespace Forshen.ERP.ProductManagement.Entities;
 
 public class DimensionValue : IEntity
 {
-    public required int Id { get; set; }
-    public required int DimensionId { get; set; }
+    public int Id { get; set; }
+    public int DimensionId { get; set; }
     public required Dimension Dimension { get; set; }
     public required string Value { get; set; }
     public DateTimeOffset CreatedAt { get; set; }

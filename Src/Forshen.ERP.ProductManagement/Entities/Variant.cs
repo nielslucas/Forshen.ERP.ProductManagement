@@ -10,7 +10,12 @@ public class Variant : IEntity
     /// <summary>
     /// Identifier for the variant
     /// </summary>
-    public required int Id { get; set; }
+    public int Id { get; set; }
+    
+    /// <summary>
+    /// A combination of the dimensions names and values
+    /// </summary>
+    public string Name { get; set; }
 
     /// <inheritdoc/>
     public DateTimeOffset CreatedAt { get; set; }
@@ -27,12 +32,29 @@ public class Variant : IEntity
     public required bool MainVariant { get; set; }
     
     /// <summary>
+    /// The identifier to which product the variant belongs to.
+    /// </summary>
+    public int ProductId { get; set; }
+    
+    /// <summary>
     /// To which product the variant belongs to. 
     /// </summary>
-    public required Product Product { get; set; }
+    public Product Product { get; set; }
     
     /// <summary>
     /// The different kinds of dimensions together with its values for this variant
     /// </summary>
     public required ICollection<VariantDimensionValue> VariantDimensionValues { get; set; }
+
+    public void UpdateName()
+    {
+        var name = new List<string>();
+
+        foreach (var variantDimensionValue in VariantDimensionValues)
+        {
+            name.Add($"{variantDimensionValue.DimensionValue.Dimension.Name}: {variantDimensionValue.DimensionValue.Value}");
+        }
+        
+        Name = string.Join(" | ", name);
+    }
 }

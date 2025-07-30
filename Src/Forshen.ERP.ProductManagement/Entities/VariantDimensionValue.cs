@@ -4,12 +4,12 @@ namespace Forshen.ERP.ProductManagement.Entities;
 
 public class VariantDimensionValue :  IEntity
 {
-    public required int Id { get; set; }
-    public required int VariantId { get; set; }
-    public required Variant Variant { get; set; }
+    public int Id { get; set; }
+    public int VariantId { get; set; }
+    public Variant Variant { get; set; }
     
-    public required int DimensionValueId { get; set; }
+    public int DimensionValueId { get; set; }
     public required DimensionValue DimensionValue { get; set; }
-    public required DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
 }

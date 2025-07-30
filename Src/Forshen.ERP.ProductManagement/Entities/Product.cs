@@ -14,16 +14,16 @@ public class Product : IEntity
     /// The name of the product 
     /// </summary>
     public required string Name { get; set; }
-    
+
     /// <summary>
     /// Related dimensions for the product 
     /// </summary>
-    public required ICollection<Dimension> Dimensions { get; set; }
-    
+    public ICollection<Dimension> Dimensions { get; set; } = [];
+
     /// <summary>
     /// Related variants for the product
     /// </summary>
-    public required ICollection<Dimension> Variants { get; set; }
+    public ICollection<Variant> Variants { get; set; } = [];
     
     /// <inheritdoc/>
     public DateTimeOffset CreatedAt { get; set; }

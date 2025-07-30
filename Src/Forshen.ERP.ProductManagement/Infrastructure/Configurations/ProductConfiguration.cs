@@ -20,5 +20,13 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .IsRequired();
 
         builder.Property(p => p.UpdatedAt);
+        
+        builder.HasMany(v => v.Dimensions)
+            .WithMany(d => d.Products)
+            .UsingEntity(j =>
+            {
+                j.ToTable("ProductDimensions");
+                // You could add more config here if needed
+            });
     }
 }
