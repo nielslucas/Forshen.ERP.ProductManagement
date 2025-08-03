@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{B24CBA82
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.Cli", "Tools\Forshen.ERP.ProductManagement.Cli\Forshen.ERP.ProductManagement.Cli.csproj", "{F555124B-0EB0-4F3B-9798-588C61E60DB8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forshen.ERP.ProductManagement.Web", "Src\Forshen.ERP.ProductManagement.Web\Forshen.ERP.ProductManagement.Web.csproj", "{443A17A6-0D30-4D53-98D8-EC552D8491A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +30,15 @@ Global
 		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F555124B-0EB0-4F3B-9798-588C61E60DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{443A17A6-0D30-4D53-98D8-EC552D8491A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{443A17A6-0D30-4D53-98D8-EC552D8491A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{443A17A6-0D30-4D53-98D8-EC552D8491A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{443A17A6-0D30-4D53-98D8-EC552D8491A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E432AA85-3B59-485B-AE1A-4F99822F35D2} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
 		{607E8ABE-F902-4CA5-A6C2-4AABF0E34279} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
 		{F555124B-0EB0-4F3B-9798-588C61E60DB8} = {B24CBA82-42FC-444C-8D78-F81589F2C221}
+		{443A17A6-0D30-4D53-98D8-EC552D8491A0} = {E9F39EF3-1784-4680-B8F7-4A5CA0557C8A}
 	EndGlobalSection
 EndGlobal
