@@ -1,5 +1,5 @@
 <template>
   <div class="p-8">
-    <UButton>Styled Button</UButton>
+      Main page
   </div>
 </template>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { Client, Product } from '~/lib/client/api-client'  // Adjust path to your generated client
-import axios, { AxiosError } from 'axios';
 
 const data = ref<Product[]>([])
 
@@ -9,10 +8,6 @@ const data = ref<Product[]>([])
 const api = new Client('http://localhost:5000')
 
 onMounted(async () => {
-
-  const response = await fetch('http://localhost:5000/products');
-  console.log('Raw axios response:', response);
-  
   try {
     // Replace `getData()` with your actual generated method name
     const response = await api.product()
@@ -25,5 +20,5 @@ onMounted(async () => {
 </script>
 
 <template>
-  <UTable :data="data" class="flex-1" />
+  werkt dit nu wel?
 </template>
