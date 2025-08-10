@@ -248,6 +248,77 @@ export class Client {
         }
         return Promise.resolve<string>(null as any);
     }
+
+    /**
+     * @param page (optional) 
+     * @param rowsPerPage (optional) 
+     * @param sortBy (optional) 
+     * @param descending (optional) 
+     * @return Success
+     */
+    productOverview(page: number | undefined, rowsPerPage: number | undefined, sortBy: string | undefined, descending: boolean | undefined, cancelToken?: CancelToken): Promise<ProductPaginationResponse> {
+        let url_ = this.baseUrl + "/Products/overview?";
+        if (page === null)
+            throw new globalThis.Error("The parameter 'page' cannot be null.");
+        else if (page !== undefined)
+            url_ += "page=" + encodeURIComponent("" + page) + "&";
+        if (rowsPerPage === null)
+            throw new globalThis.Error("The parameter 'rowsPerPage' cannot be null.");
+        else if (rowsPerPage !== undefined)
+            url_ += "rowsPerPage=" + encodeURIComponent("" + rowsPerPage) + "&";
+        if (sortBy === null)
+            throw new globalThis.Error("The parameter 'sortBy' cannot be null.");
+        else if (sortBy !== undefined)
+            url_ += "sortBy=" + encodeURIComponent("" + sortBy) + "&";
+        if (descending === null)
+            throw new globalThis.Error("The parameter 'descending' cannot be null.");
+        else if (descending !== undefined)
+            url_ += "descending=" + encodeURIComponent("" + descending) + "&";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: AxiosRequestConfig = {
+            method: "GET",
+            url: url_,
+            headers: {
+                "Accept": "application/json"
+            },
+            cancelToken
+        };
+
+        return this.instance.request(options_).catch((_error: any) => {
+            if (isAxiosError(_error) && _error.response) {
+                return _error.response;
+            } else {
+                throw _error;
+            }
+        }).then((_response: AxiosResponse) => {
+            return this.processProductOverview(_response);
+        });
+    }
+
+    protected processProductOverview(response: AxiosResponse): Promise<ProductPaginationResponse> {
+        const status = response.status;
+        let _headers: any = {};
+        if (response.headers && typeof response.headers === "object") {
+            for (const k in response.headers) {
+                if (response.headers.hasOwnProperty(k)) {
+                    _headers[k] = response.headers[k];
+                }
+            }
+        }
+        if (status === 200) {
+            const _responseText = response.data;
+            let result200: any = null;
+            let resultData200  = _responseText;
+            result200 = ProductPaginationResponse.fromJS(resultData200);
+            return Promise.resolve<ProductPaginationResponse>(result200);
+
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.data;
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Promise.resolve<ProductPaginationResponse>(null as any);
+    }
 }
 
 export class Batch implements IBatch {
@@ -596,6 +667,54 @@ export interface IProduct {
     variants?: Variant[] | undefined;
     createdAt?: Date;
     updatedAt?: Date | undefined;
+}
+
+export class ProductPaginationResponse implements IProductPaginationResponse {
+    pageItems?: Product[] | undefined;
+    totalItemsCount?: number;
+
+    constructor(data?: IProductPaginationResponse) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            if (Array.isArray(_data["pageItems"])) {
+                this.pageItems = [] as any;
+                for (let item of _data["pageItems"])
+                    this.pageItems!.push(Product.fromJS(item));
+            }
+            this.totalItemsCount = _data["totalItemsCount"];
+        }
+    }
+
+    static fromJS(data: any): ProductPaginationResponse {
+        data = typeof data === 'object' ? data : {};
+        let result = new ProductPaginationResponse();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (Array.isArray(this.pageItems)) {
+            data["pageItems"] = [];
+            for (let item of this.pageItems)
+                data["pageItems"].push(item ? item.toJSON() : undefined as any);
+        }
+        data["totalItemsCount"] = this.totalItemsCount;
+        return data;
+    }
+}
+
+export interface IProductPaginationResponse {
+    pageItems?: Product[] | undefined;
+    totalItemsCount?: number;
 }
 
 export class Variant implements IVariant {
