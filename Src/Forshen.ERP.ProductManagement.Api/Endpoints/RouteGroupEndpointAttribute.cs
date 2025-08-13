@@ -12,6 +12,7 @@ public class RouteGroupEndpointAttribute : Attribute
     public enum Group
     {
         Products
+        , ProductDimensions
         , Movies
     }
 }
